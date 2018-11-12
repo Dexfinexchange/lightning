@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - JSON API: use `\n\n` to terminate responses, for simplified parsing (pylightning now relies on this)
+- Plugins: Added plugins to `lightningd` and implemented the option passthrough.
 
 ### Changed
 
