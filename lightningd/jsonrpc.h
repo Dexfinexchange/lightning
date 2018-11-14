@@ -6,6 +6,7 @@
 #include <ccan/list/list.h>
 #include <common/json.h>
 #include <lightningd/json_stream.h>
+#include <lightningd/log.h>
 #include <stdarg.h>
 
 /* The command mode tells param() how to process. */
@@ -93,7 +94,15 @@ void PRINTF_FMT(3, 4) command_fail(struct command *cmd, int code,
 void command_still_pending(struct command *cmd);
 
 /* For initialization */
-void setup_jsonrpc(struct lightningd *ld, const char *rpc_filename);
+struct jsonrpc *setup_jsonrpc(struct lightningd *ld);
+
+/**
+ * Add a new command/method to the JSON-RPC interface.
+ *
+ * Returns true if the command was added correctly, false if adding
+ * this would clobber a command name.
+ */
+bool jsonrpc_command_add(struct jsonrpc *rpc, struct json_command *command);
 
 AUTODATA_TYPE(json_command, struct json_command);
 #endif /* LIGHTNING_LIGHTNINGD_JSONRPC_H */
