@@ -19,7 +19,7 @@ def json_hello(request):
     return greeting
 
 
-def json_init(request):
+def json_getmanifest(request):
     global greeting
     return {
         "options": [
@@ -37,7 +37,7 @@ def json_init(request):
     }
 
 
-def json_configure(request):
+def json_init(request):
     """The main daemon is telling us the relevant cli options
     """
     global greeting
@@ -46,15 +46,10 @@ def json_configure(request):
     return "ok"
 
 
-def json_ping(request):
-    return "pong"
-
-
 methods = {
     'hello': json_hello,
+    'getmanifest': json_getmanifest,
     'init': json_init,
-    'ping': json_ping,
-    'configure': json_configure,
 }
 
 partial = ""
