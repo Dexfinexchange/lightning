@@ -224,7 +224,7 @@ static struct lightningd *new_lightningd(const tal_t *ctx)
 	 *code. Here we initialize the context that will keep track and control
 	 *the plugins.
 	 */
-	ld->plugins = plugins_new(ld, ld->log_book);
+	ld->plugins = plugins_new(ld, ld->log_book, ld->jsonrpc);
 
 	return ld;
 }
