@@ -347,11 +347,12 @@ static const struct json_command *find_cmd(const struct jsonrpc *rpc,
 {
 	struct json_command **commands = rpc->commands;
 
-	/* commands[i]->name can be NULL in test code. */
-	for (size_t i=0; i<tal_count(commands); i++)
-          if (commands[i]->name &&
-              json_tok_streq(buffer, tok, commands[i]->name))
-            return commands[i];
+	/* commands[i] can be NULL if the plugin that registered it
+	 * was killed, commands[i]->name can be NULL in test code. */
+	for (size_t i = 0; i < tal_count(commands); i++)
+		if (commands[i] && commands[i]->name &&
+		    json_tok_streq(buffer, tok, commands[i]->name))
+			return commands[i];
 	return NULL;
 }
 
@@ -737,6 +738,15 @@ bool jsonrpc_command_add(struct jsonrpc *rpc, struct json_command *command)
 	tal_resize(&rpc->commands, count + 1);
 	rpc->commands[count] = command;
 	return true;
+}
+
+void jsonrpc_command_remove(struct jsonrpc *rpc, const char *method)
+{
+	// FIXME: Currently leaves NULL entries in the table, if we
+	// restart plugins we should shift them out.
+	for (size_t i=0; i<tal_count(rpc->commands); i++)
+		if (streq(rpc->commands[i]->name, method))
+			rpc->commands[i] = tal_free(rpc->commands[i]);
 }
 
 struct jsonrpc *jsonrpc_new(const tal_t *ctx, struct lightningd *ld)
