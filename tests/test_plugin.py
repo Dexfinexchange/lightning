@@ -14,7 +14,7 @@ def test_option_passthrough(node_factory):
         '--help'
     ]).decode('utf-8')
     assert('--greeting' not in help_out)
-    
+
     help_out = subprocess.check_output([
         'lightningd/lightningd',
         '--plugin={}'.format(plugin_path),
