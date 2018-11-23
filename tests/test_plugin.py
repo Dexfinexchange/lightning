@@ -2,6 +2,7 @@ from fixtures import *  # noqa: F401,F403
 
 import subprocess
 
+
 def test_option_passthrough(node_factory):
     """ Ensure that registering options works.
 
