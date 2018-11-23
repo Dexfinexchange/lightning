@@ -6,7 +6,6 @@
 #include <ccan/list/list.h>
 #include <common/json.h>
 #include <lightningd/json_stream.h>
-#include <lightningd/log.h>
 #include <stdarg.h>
 
 /* The command mode tells param() how to process. */
