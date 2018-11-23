@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Simple plugin to show how to build new plugins for c-lightning
 
 It demonstrates how a plugin communicates with c-lightning, how it registers
