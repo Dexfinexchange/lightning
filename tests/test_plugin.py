@@ -20,7 +20,7 @@ def test_option_passthrough(node_factory):
         'lightningd/lightningd',
         '--plugin={}'.format(plugin_path),
         '--help'
-    ]).decode('utf-8')
+    ], timeout=10).decode('utf-8')
     assert('--greeting' in help_out)
 
     # Now try to see if it gets accepted, would fail to start if the
