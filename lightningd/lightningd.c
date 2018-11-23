@@ -797,6 +797,7 @@ int main(int argc, char *argv[])
 	tal_free(ld->jsonrpc);
 	db_commit_transaction(ld->wallet->db);
 
+	tal_free(ld->plugins);
 	remove(ld->pidfile);
 
 	/* FIXME: pay can have children off tmpctx which unlink from
