@@ -38,7 +38,7 @@ ifeq ($(COMPAT),1)
 COMPAT_CFLAGS=-DCOMPAT_V052=1 -DCOMPAT_V060=1 -DCOMPAT_V061=1
 endif
 
-PYTEST_OPTS := -v --timeout=300
+PYTEST_OPTS := -v --timeout=600
 
 # This is where we add new features as bitcoin adds them.
 FEATURES :=
